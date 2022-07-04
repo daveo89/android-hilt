@@ -24,12 +24,20 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.android.hilt.ui.MainActivity
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import org.hamcrest.Matchers.*
 import org.junit.*
 import org.junit.runner.*
 
+// HiltAndroidTest - is responsible for generating the Hilt components for each test
+@HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class AppTest {
+
+    // HiltAndroidRule - manages the components state and is used to perform injection on your test.
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
 
     @Test
     fun happyPath() {
