@@ -1,3 +1,4 @@
+package com.example.android.hilt
 /*
  * Copyright (C) 2020 The Android Open Source Project
  *
@@ -14,8 +15,6 @@
  * limitations under the License.
  */
 
-package com.example.android.hilt
-
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -24,21 +23,21 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import com.example.android.hilt.ui.MainActivity
-import org.hamcrest.Matchers.containsString
-import org.junit.After
-import org.junit.Test
-import org.junit.runner.RunWith
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import org.hamcrest.Matchers.*
+import org.junit.*
+import org.junit.runner.*
 
+// HiltAndroidTest - is responsible for generating the Hilt components for each test
+@HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class AppTest {
 
-    @After
-    fun tearDown() {
-        // Remove logs after the test finishes
-        ServiceLocator(getInstrumentation().targetContext).loggerLocalDataSource.removeLogs()
-    }
+    // HiltAndroidRule - manages the components state and is used to perform injection on your test.
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
 
     @Test
     fun happyPath() {

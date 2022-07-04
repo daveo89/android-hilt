@@ -17,13 +17,19 @@
 package com.example.android.hilt
 
 import android.app.Application
+import com.example.android.hilt.data.LoggerDataSource
+import com.example.android.hilt.di.DatabaseLogger
+import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
 
+@HiltAndroidApp
 class LogApplication : Application() {
 
-    lateinit var serviceLocator: ServiceLocator
+    @DatabaseLogger
+    @Inject
+    lateinit var logger: LoggerDataSource
 
     override fun onCreate() {
         super.onCreate()
-        serviceLocator = ServiceLocator(applicationContext)
     }
 }
