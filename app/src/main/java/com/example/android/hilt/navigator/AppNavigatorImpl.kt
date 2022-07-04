@@ -16,6 +16,7 @@
 
 package com.example.android.hilt.navigator
 
+import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import com.example.android.hilt.R
 import com.example.android.hilt.ui.ButtonsFragment
@@ -26,6 +27,10 @@ import javax.inject.Inject
  * Navigator implementation.
  */
 class AppNavigatorImpl @Inject constructor(private val activity: FragmentActivity) : AppNavigator {
+
+    init {
+        Log.d("AppNavigatorImpl", "${hashCode()}")
+    }
 
     override fun navigateTo(screen: Screens) {
         val fragment = when (screen) {
